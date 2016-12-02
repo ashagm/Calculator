@@ -109,18 +109,20 @@ var firstNumber = '',
     operator = '',
     result;
 
-    var isOperatorClicked = false;
-
-    $('.number').on('click', function(){
+    var isOperatorClicked = false;   
+   
+    $('.number').on('click', function(){   
+        var first = ''; second = '';  
         if(!isOperatorClicked){
-            firstNumber += $(this).attr('value');
+            first = first + $(this).attr('value');
+            firstNumber = first;
+            $('#firstNumber').append(firstNumber);
 
         }else{
-            secondNumber += $(this).attr('value');
-        }
-
-        console.log('firstNumber', firstNumber);
-        console.log('secondNumber', secondNumber);
+            second += $(this).attr('value');
+            secondNumber = second;
+            $('#secondNumber').append(secondNumber);
+        }    
 
     });
 
@@ -128,15 +130,14 @@ var firstNumber = '',
         isOperatorClicked = true;
         operator = $(this).attr('value');
 
-        // operator = $(this).text();
-        console.log('operator', operator);
-        
+        var opSymbol = $(this).text();
+        $('#operator').append(opSymbol);        
     });
 
 
     $('.equal').on('click', function(){
-        firstNumber = parseInt(firstNumber);
-        secondNumber = parseInt(secondNumber);
+        firstNumber = parseInt($('#firstNumber').text());
+        secondNumber = parseInt($('#secondNumber').text());
 
         console.log(firstNumber, '', secondNumber, '', operator);
 
@@ -162,6 +163,9 @@ var firstNumber = '',
         operator = '';
         result = '';
         isOperatorClicked = false;
+        $('#firstNumber').text('');
+        $('#secondNumber').text('');
+        $('#operator').text('');
         $('#result').text('');
 
     });
